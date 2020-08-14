@@ -8,18 +8,18 @@ using System.Threading.Tasks;
 
 namespace FitTrackerCapStone.Models
 {
-    public class CustomerModel
+    public class Customer
     {
         [Key]
-        public int Id { get; set; }
+        public int CustomerId { get; set; }
         public string UserName { get; set; }
 
         [ForeignKey("IdentityUser")]
         public string IdentityUserId { get; set; }
         public IdentityUser IdentityUser { get; set; }
 
-       // [ForeignKey("Diet")]
-        //public int DietId { get; set; }
-       // public Diet Diet {get; set;}
+        [ForeignKey("Diet")]
+        public int DietId { get; set; }
+        public Diet Diet {get; set;}
     }
 }
