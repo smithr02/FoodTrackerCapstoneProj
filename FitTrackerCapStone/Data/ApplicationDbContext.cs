@@ -16,6 +16,12 @@ namespace FitTrackerCapStone.Data
         }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Diet> Diets { get; set; }
+        public DbSet<Meal> Meals { get; set; }
+        public DbSet<Food> Foods { get; set; }
+        public DbSet<Full_Nutrients> Full_Nutrients { get; set; }
+        public DbSet<Photo> Photo { get; set; }
+        public DbSet<Alt_Measures> Alt_Measures { get; set; }
+        public DbSet<Tags> Tags { get; set; }
         
         protected override void OnModelCreating(ModelBuilder builder)
         {
