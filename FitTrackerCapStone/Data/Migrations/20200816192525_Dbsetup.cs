@@ -118,7 +118,7 @@ namespace FitTrackerCapStone.Data.Migrations
                         column: x => x.MealsID,
                         principalTable: "Meals",
                         principalColumn: "MealId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -141,7 +141,7 @@ namespace FitTrackerCapStone.Data.Migrations
                         column: x => x.foodID,
                         principalTable: "Foods",
                         principalColumn: "FoodId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -162,7 +162,7 @@ namespace FitTrackerCapStone.Data.Migrations
                         column: x => x.foodId,
                         principalTable: "Foods",
                         principalColumn: "FoodId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -182,7 +182,7 @@ namespace FitTrackerCapStone.Data.Migrations
                         column: x => x.FoodId,
                         principalTable: "Foods",
                         principalColumn: "FoodId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -204,7 +204,7 @@ namespace FitTrackerCapStone.Data.Migrations
                         column: x => x.foodID,
                         principalTable: "Foods",
                         principalColumn: "FoodId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -228,7 +228,7 @@ namespace FitTrackerCapStone.Data.Migrations
                         column: x => x.FoodId,
                         principalTable: "Foods",
                         principalColumn: "FoodId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.InsertData(

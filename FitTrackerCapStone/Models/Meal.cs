@@ -154,6 +154,16 @@ public class Kitchen
     public static Food ReturnFoods(Food food, Alt_Measures alt_Measures, Full_Nutrients full_Nutrients, Photo photo, Tags tags)
     {
         Food foodOutput = food;
+        Alt_Measures alt_measuresOutput = alt_Measures;
+        Full_Nutrients full_NutrientsOutput = full_Nutrients;
+        Photo photoOutput = photo;
+        int alt_measuresId = alt_Measures.Alt_MeasuresID;
+        int foodId = food.FoodId;
+        int full_NutrientsId = full_Nutrients.Full_NutrientsID;
+        int photoId = photo.photoID;
+
+
+
         return foodOutput;
     }
     

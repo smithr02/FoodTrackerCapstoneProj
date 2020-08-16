@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using FitTrackerCapStone.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace FitTrackerCapStone.Controllers
 {
@@ -18,7 +21,27 @@ namespace FitTrackerCapStone.Controllers
         // GET: CustomerController
         public ActionResult Index()
         {
+            ApiPost("bagel");
             return View();
+        }
+
+        public async void ApiPost(string request)
+        {
+            string apiKey = ApiKeys.nutritionApiKey;
+            string apiId = ApiKeys.nurtitionAppId;
+            string url = "https://trackapi.nutritionix.com/v2/natural/nutrients";
+            HttpClient httpClient = new HttpClient();
+            httpClient.DefaultRequestHeaders.Add("x-app-id", apiId);
+            httpClient.DefaultRequestHeaders.Add("x-app-key", apiKey);
+
+            Querys query = new Querys(request);
+            var payload = JsonConvert.SerializeObject(query);
+            HttpContent content = new StringContent(payload, Encoding.UTF8, "application/json");
+            var httpResponse = await httpClient.PostAsync(url, content);
+            var data = await httpResponse.Content.ReadAsStringAsync();
+            var someinfo = JsonConvert.DeserializeObject<Food>(data);
+
+            var number = 2;
         }
 
         // GET: CustomerController/Details/5
