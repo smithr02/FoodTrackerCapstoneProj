@@ -18,8 +18,8 @@ namespace FitTrackerCapStone.Models
         public string IdentityUserId { get; set; }
         public IdentityUser IdentityUser { get; set; }
 
-        [ForeignKey("Diet")]
-        public int DietId { get; set; }
-        public Diet Diet {get; set;}
+        [ForeignKey("Meal")]
+        public int MealId { get; set; }
+        public Meal Meal {get; set;}
     }
 }

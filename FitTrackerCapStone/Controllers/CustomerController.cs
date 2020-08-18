@@ -8,6 +8,7 @@ using FitTrackerCapStone.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace FitTrackerCapStone.Controllers
 {
@@ -38,8 +39,18 @@ namespace FitTrackerCapStone.Controllers
             var payload = JsonConvert.SerializeObject(query);
             HttpContent content = new StringContent(payload, Encoding.UTF8, "application/json");
             var httpResponse = await httpClient.PostAsync(url, content);
-            var data = await httpResponse.Content.ReadAsStringAsync();
-            var someinfo = JsonConvert.DeserializeObject<Food>(data);
+            if (httpResponse.IsSuccessStatusCode)
+            {
+                var data = await httpResponse.Content.ReadAsStringAsync();
+                JObject jsonResult = JsonConvert.DeserializeObject<JObject>(data);
+                JToken foods = jsonResult["foods"];
+                Kitchen kitchen = new Kitchen(_context);
+                kitchen.ReturnFoods(foods);
+
+            }
+
+
+            //var someinfo = JsonConvert.DeserializeObject<Food>(data);
 
             var number = 2;
         }

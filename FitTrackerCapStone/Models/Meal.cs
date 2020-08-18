@@ -1,6 +1,7 @@
 ﻿using FitTrackerCapStone;
 using FitTrackerCapStone.Data;
 using FitTrackerCapStone.Models;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -16,9 +17,9 @@ namespace FitTrackerCapStone
         public int MealId { get; set; }
         public Food[] Foods { get; set; }
 
-        [ForeignKey("Diet")]
-        public int DietId { get; set; }
-        public Diet Diet { get; set; }
+        [ForeignKey("Customer")]
+        public int customerId { get; set; }
+        public Customer Customer { get; set; }
 
     }
  
@@ -151,20 +152,52 @@ public class Kitchen
     {
         _context = context;
     }
-    public static Food ReturnFoods(Food food, Alt_Measures alt_Measures, Full_Nutrients full_Nutrients, Photo photo, Tags tags)
+    public  Meal ReturnFoods(JToken foods)
     {
-        Food foodOutput = food;
-        Alt_Measures alt_measuresOutput = alt_Measures;
-        Full_Nutrients full_NutrientsOutput = full_Nutrients;
-        Photo photoOutput = photo;
-        int alt_measuresId = alt_Measures.Alt_MeasuresID;
-        int foodId = food.FoodId;
-        int full_NutrientsId = full_Nutrients.Full_NutrientsID;
-        int photoId = photo.photoID;
+        Alt_Measures alt_Measures;
+        Full_Nutrients full_Nutrients;
+        Photo photo;
+        Tags tags;
+        Meal meal = new Meal();
+        Food foodOutput;
+        //int alt_measuresId = alt_Measures.Alt_MeasuresID;
+        //int foodId = food.FoodId;
+        //int full_NutrientsId = full_Nutrients.Full_NutrientsID;
+        //int photoId = photo.photoID;
+        _context.Meals.Add(meal);
+        _context.SaveChanges();
+        int mealId = meal.MealId;
+        foreach ( var food in foods)
+        {
+            foodOutput = new Food();
+            foodOutput.MealsID = mealId;
+            foodOutput.Meal = meal;
+            foodOutput.food_name = food["food_name"];
+            foodOutput.brand_name = food["brand_name"];
+            foodOutput.serving_qty = food["serving_qty"];
+            foodOutput.serving_unit = food["serving_unit"];
+            foodOutput.serving_weight_grams = food["serving_weight_grams"];
+            foodOutput.nf_calories = food["nf_calories"];
+            foodOutput.nf_total_fat = food["nf_total_fat"];
+            foodOutput.nf_saturated_fat = food["nf_saturated_fat"];
+            foodOutput.nf_cholesterol = food["nf_cholesterol"];
+            foodOutput.nf_sodium = food["nf_sodium"];
+            foodOutput.nf_total_carbohydrate = food["nf_total_carbohydrate"];
+            foodOutput.nf_dietary_fiber = food["nf_dietary_fiber"];
+            foodOutput.nf_sugars = food["nf_sugars"];
+            foodOutput.nf_protein = food["nf_protein"];
+            foodOutput.nf_potassium = food["nf_potassium"];
+
+            foodOutput.full_nutrients = food["full_nutrients"];
 
 
 
-        return foodOutput;
+           var something = food;
+
+        }
+
+
+        return meal;
     }
     
 }
